@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+pandas
+numpy
+streamlit
+python-multipart
+requests
+plotly
+matplotlib
+seaborn
+google-generativeai
+pytest

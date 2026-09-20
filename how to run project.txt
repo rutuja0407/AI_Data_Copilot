@@ -1,0 +1,105 @@
+🔧 Setup (First Time)
+
+Open project in VS Code
+
+Open the folder Ai_Data_copilot in VS Code.
+
+Create a virtual environment
+
+In the VS Code terminal:
+
+python -m venv .venv
+
+
+Activate the virtual environment
+
+On Windows (PowerShell):
+
+.venv\Scripts\activate
+
+
+You should see (.venv) at the beginning of the terminal prompt.
+
+Install dependencies
+
+Make sure you are in the project root (where requirements.txt is), then run:
+
+pip install -r requirements.txt
+
+Configure Gemini API key
+
+The backend expects a Google Gemini key via the environment variable GEMINI_API_KEY. In PowerShell:
+
+$Env:GEMINI_API_KEY = "your-api-key"
+
+Optionally override the model or temperature:
+
+$Env:GEMINI_MODEL = "models/gemini-2.5-flash"
+$Env:GEMINI_TEMPERATURE = "0.1"
+
+If you previously set a different model with `setx`, open a fresh PowerShell window after updating the value so the backend sees the change.
+
+🤖 LLM Workflows
+
+- **Cleaning Plan**: Use the "Gemini Cleaning Plan" panel in Streamlit to request structured cleaning steps. Dry-run before applying to persist changes.
+- **Code Agent**: Use the "Gemini Code Agent" panel for free-form analytics or transformations. The model returns Python `transform(df)` code executed in a restricted backend sandbox. Always dry-run first to inspect the summary and preview.
+- All LLM proposals and executions are logged in the backend audit trail for traceability.
+
+🚀 Running the Project
+
+You’ll run two processes:
+
+One for backend (FastAPI)
+
+One for frontend (Streamlit)
+
+1️⃣ Start the Backend (FastAPI)
+
+In VS Code terminal (with venv active):
+
+python -m uvicorn backend.app:app --reload
+
+
+You should see something like:
+
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Application startup complete.
+
+
+🔹 If you open http://127.0.0.1:8000/ and see 404 Not Found, that’s normal.
+There is no route defined for /. Use /docs instead.
+
+You can test the API docs here (optional):
+👉 http://127.0.0.1:8000/docs
+
+⚠️ Keep this terminal open. Don’t stop it.
+
+2️⃣ Start the Frontend (Streamlit)
+
+Open a new terminal in VS Code:
+
+Activate the virtual environment again:
+
+.venv\Scripts\activate
+
+
+Run Streamlit:
+
+streamlit run frontend/app.py
+
+
+You’ll see something like:
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+
+
+Open this in your browser:
+
+👉 http://localhost:8501
+
+Backend = http://127.0.0.1:8000
+Frontend = http://localhost:8501
+
+Both must be running at the same time.
